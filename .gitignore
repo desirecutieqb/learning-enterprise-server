@@ -16,4 +16,4 @@ dist/
 build/
 .out/
 .next/
-.vercel/
+.vercel/.env
