@@ -54,7 +54,7 @@ if (!isProduction) {
     dynamoose.aws.ddb.local();
 }
 exports.clerkClient = (0, express_2.createClerkClient)({
-    secretKey: process.env.CLERK_SECRET_KEY
+    secretKey: process.env.CLERK_SECRET_KEY,
 });
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -64,12 +64,13 @@ app.use((0, morgan_1.default)("common"));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use((0, cors_1.default)());
+app.use((0, express_2.clerkMiddleware)());
 //ROUTES
 app.get("/", (req, res) => {
     res.send("Hello world!");
 });
 app.use("/courses", courseRoutes_1.default);
-app.use("/users/clerk", userClerkRoutes_1.default);
+app.use("/users/clerk", (0, express_2.requireAuth)(), userClerkRoutes_1.default);
 //SERVER
 const port = process.env.PORT || 3000;
 if (!isProduction) {
