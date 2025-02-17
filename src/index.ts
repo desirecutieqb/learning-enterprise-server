@@ -5,6 +5,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import * as dynamoose from "dynamoose";
+import transactionRoutes from "./routes/transactionRoutes";
 import {
   clerkMiddleware,
   createClerkClient,
@@ -38,7 +39,7 @@ app.get("/", (req, res) => {
 
 app.use("/courses", courseRoutes);
 app.use("/users/clerk", requireAuth(), userClerkRoutes);
-
+app.use("/transactions", requireAuth(), transactionRoutes);
 //SERVER
 
 const port = process.env.PORT || 3000;
