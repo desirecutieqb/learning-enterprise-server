@@ -44,6 +44,7 @@ const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
 const dynamoose = __importStar(require("dynamoose"));
+const transactionRoutes_1 = __importDefault(require("./routes/transactionRoutes"));
 const express_2 = require("@clerk/express");
 const courseRoutes_1 = __importDefault(require("./routes/courseRoutes"));
 const userClerkRoutes_1 = __importDefault(require("./routes/userClerkRoutes"));
@@ -71,6 +72,7 @@ app.get("/", (req, res) => {
 });
 app.use("/courses", courseRoutes_1.default);
 app.use("/users/clerk", (0, express_2.requireAuth)(), userClerkRoutes_1.default);
+app.use("/transactions", (0, express_2.requireAuth)(), transactionRoutes_1.default);
 //SERVER
 const port = process.env.PORT || 3000;
 if (!isProduction) {
