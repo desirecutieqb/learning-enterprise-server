@@ -75,10 +75,8 @@ export const createTransaction = async (
   const { userId, courseId, transactionId, amount, paymentProvider } = req.body;
 
   try {
-    // 1. get course info
     const course = await Course.get(courseId);
 
-    // 2. create transaction record
     const newTransaction = new Transaction({
       dateTime: new Date().toISOString(),
       userId,
@@ -89,7 +87,6 @@ export const createTransaction = async (
     });
     await newTransaction.save();
 
-    // 3. create initial course progress
     const initialProgress = new UserCourseProgress({
       userId,
       courseId,
@@ -106,7 +103,6 @@ export const createTransaction = async (
     });
     await initialProgress.save();
 
-    // 4. add enrollment to relevant course
     await Course.update(
       { courseId },
       {
