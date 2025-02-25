@@ -1,5 +1,4 @@
-FROM public.ecr.aws/lambda/node.js:20 AS build
-
+FROM public.ecr.aws/lambda/nodejs:20 AS build
 WORKDIR /app
 
 COPY package*.json ./
@@ -12,7 +11,7 @@ RUN npm run build
 
 RUN npm prune --production
 
-FROM public.ecr.aws/lambda/node.js:20
+FROM public.ecr.aws/lambda/nodejs:20
 
 WORKDIR ${LAMBDA_TASK_ROOT}
 
