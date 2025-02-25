@@ -37,7 +37,7 @@ export const createCourse = async (
   res: Response
 ): Promise<void> => {
   try {
-    const [teacherId, teacherName] = req.body;
+    const { teacherId, teacherName } = req.body;
     if (!teacherId || !teacherName) {
       res.status(400).json({ message: "Teacher ID and name are required" });
       return;
@@ -137,7 +137,7 @@ export const deleteCourse = async (
       return;
     }
     await Course.delete(courseId);
-    res.json({ message: "Courses deleted successfully"});
+    res.json({ message: "Courses deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting course", error });
   }

@@ -46,7 +46,7 @@ const getCourse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getCourse = getCourse;
 const createCourse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const [teacherId, teacherName] = req.body;
+        const { teacherId, teacherName } = req.body;
         if (!teacherId || !teacherName) {
             res.status(400).json({ message: "Teacher ID and name are required" });
             return;
