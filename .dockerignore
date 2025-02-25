@@ -1,0 +1,9 @@
+Dockerfile
+.dockerignore
+node_modules/
+npm-debuh.log*
+README.md
+.git/
+.gitignore
+*.md
+dist/
