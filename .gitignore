@@ -1,5 +1,5 @@
-node_modules/
-
+**/node_modules/
+**/dist/
 .env
 .env.local
 .env.development
@@ -12,7 +12,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-dist/
+.DS_Store
+Thumbs.db
+.vscode/
+shared-local-instance.db
+dynamo-local-metadata.json
 build/
 .out/
 .next/

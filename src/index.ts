@@ -14,6 +14,8 @@ import {
 import courseRoutes from "./routes/courseRoutes";
 import userClerkRoutes from "./routes/userClerkRoutes";
 import userCourseProgressRoutes from "./routes/userCourseProgressRoutes";
+import serverless from "serverless-http";
+import seed from "./seed/seedDynamodb";
 // CONFIGURATIONS
 dotenv.config();
 const isProduction = process.env.NODE_ENV === "production";
@@ -49,4 +51,18 @@ if (!isProduction) {
   app.listen(port, () => {
     console.log(`server is running on port ${port}`);
   });
+}
+
+// serverless
+const serverlessApp = serverless(app);
+export const handler = async (event:any, context: any )=>{
+  if(event.action === "seed"){
+    await seed();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({message: "Data seeded successfully"})
+    }
+  }else{
+    return serverlessApp(event,context);
+  }
 }
