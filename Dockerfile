@@ -21,4 +21,7 @@ COPY --from=build /app/package*.json ${LAMBDA_TASK_ROOT}
 
 ENV NODE_ENV=production
 
-CMD ["index.handler "]
+ENTRYPOINT ["/lambda-entrypoint.sh"]
+
+
+CMD ["index.handler"]
